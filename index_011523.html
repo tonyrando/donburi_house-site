@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site de Comida Japonesa">
+    <meta name="author" content="Antonio Rando">
+		<title>Donburi House</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue@3"></script>
+		<script src="https://unpkg.com/vue-router@4"></script>
+		<script src="https://unpkg.com/vuex@4"></script>
+  </head>
+  <body>
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="https://scontent.fsod2-1.fna.fbcdn.net/v/t39.30808-6/280745277_129775459666481_7301362704796263417_n.jpg?_nc_cat=103&ccb=1-6&_nc_sid=730e14&_nc_eui2=AeEM_35KRFfDTsd6juiu7ObGv7CrzubL_5a_sKvO5sv_lq6yD0q7OcMsIswDmR4FFd2rVQR9L56ImT9H1J_FvSi-&_nc_ohc=zA49Mn_uhkkAX9hF34P&_nc_ht=scontent.fsod2-1.fna&oh=00_AT80NC90pfIeTnbz8WWQmrBLrnDQ9iIrUq29MEon1fLxpg&oe=62887104" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://scontent.fsod2-1.fna.fbcdn.net/v/t39.30808-6/275580331_104270678883626_8798558468057571703_n.jpg?_nc_cat=101&ccb=1-6&_nc_sid=a26aad&_nc_eui2=AeF19f2nHo4SfMe9Dx9HIw1Sxh2dK6wus97GHZ0rrC6z3i7FBKK-ZY4-JsyO0cc8Os_Ad9q4ddw2y0osOhQlengg&_nc_ohc=4hmRWAqLnLYAX_i8GUB&_nc_ht=scontent.fsod2-1.fna&oh=00_AT_GPI_h2qN6nzEG_vk66jIuDyu7vMLcQy56pb1XX16uOw&oe=6287AABF" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://scontent.fsod2-1.fna.fbcdn.net/v/t39.30808-6/275367875_104270558883638_8208136375005104277_n.jpg?_nc_cat=103&ccb=1-6&_nc_sid=a26aad&_nc_eui2=AeFQbNuKtSsdx90CQaHJdYHHkJFLKTnkP0eQkUspOeQ_R7k8bj5JiBV3b8zirODUHzdw40pIJ9aPh3yAJzmSG772&_nc_ohc=-s45dr2XJecAX_-kQMN&_nc_ht=scontent.fsod2-1.fna&oh=00_AT_DjVqbSmtCTdxi9BtAJqjHuvGIrBZAJNZsnvjDEGdLjg&oe=62882ADF" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+		<div id="app">
+			<router-view></router-view>
+		</div>
+  </body>
+	<script>
+    const { createApp } = Vue
+		const Home = { template: `
+			<div class="h-100 text-center text-danger bg-white">
+				<main class="position-absolute top-50 start-50 translate-middle">
+					<figure class="figure "><img src="https://scontent.fcpq1-1.fna.fbcdn.net/v/t39.30808-6/277303392_116422137668480_5458005649912233494_n.jpg?stp=cp0_dst-jpg_e15_p320x320_q65&_nc_cat=106&ccb=1-6&_nc_sid=85a577&_nc_ohc=Vh0cGiuBShgAX-6KYGy&_nc_oc=AQlr76h4UlXAtgcv5kpqZZFqQ18R4AOgJkjWEkqPpy-y3_lyzf9UakS2Brep6aJtZFg&_nc_ht=scontent.fcpq1-1.fna&oh=00_AT_cNCM3bQIxx-TqkygaHcGfFj-Pt40xK2sip3JMFHE3TA&oe=6284F39D" class="figure-img img-fluid mb-50 rounded" style="height: 10rem;" alt="logo"></figure>
+					<h1 class="text-black">Donburi House.</h1>
+					<p class="lead">Refeições Orientais do tamanho da sua fome!</p>			
+					<p class="lead"><router-link to="/cardapio"><a class="btn btn-lg btn-secondary fw-bold border-danger bg-danger text-white">Cardapio</a></router-link></p>
+				</main>
+				<footer class="text-danger-50 position-absolute bottom-0 start-50 translate-middle"><p>Site desenvolvido por <a href="https://github.com/tonyrando/" class="text-black">Antorio Rando</a>.</p></footer>
+			</div>` }
+		const About = { template: `
+			<header class="site-header sticky-top">
+				<div class="container">
+					<nav class="navbar navbar-expand-lg bg-light">
+						<div class="container-fluid">
+							<router-link class="navbar-brand text-center text-danger fs-1 text fw-bolder" to="/">Donburi House</router-link>
+							<router-link to="/finalizar"><button class="btn btn-outline-success" type="submit">Finalizar Pedido</button></router-link>
+						</div>
+					</nav>
+				</div>
+			</header>
+			<div>
+				<main>
+					<div>
+						<div class="container">
+							<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col p-3">
+									<div class="card shadow-sm">
+										<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Teste" focusable="false">
+											<title>Placeholder</title>
+											<rect width="100%" height="100%" fill="#55595c"/>
+											<text x="50%" y="50%" fill="#eceeef" dy=".3em">Teste</text>
+										</svg>
+										<div class="card-body">
+											<p class="card-text">Teste</p>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary">Teste</button>
+												</div>
+												<small class="text-muted">R$ 0,00</small>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>` }
+		const Checkout = { template: `
+			<div class="container">
+				<main>
+					<div class="py-5 text-center">
+						<img class="d-block mx-auto mb-4" src="https://scontent.fcpq1-1.fna.fbcdn.net/v/t39.30808-6/277303392_116422137668480_5458005649912233494_n.jpg?stp=cp0_dst-jpg_e15_p320x320_q65&_nc_cat=106&ccb=1-6&_nc_sid=85a577&_nc_ohc=Vh0cGiuBShgAX-6KYGy&_nc_oc=AQlr76h4UlXAtgcv5kpqZZFqQ18R4AOgJkjWEkqPpy-y3_lyzf9UakS2Brep6aJtZFg&_nc_ht=scontent.fcpq1-1.fna&oh=00_AT_cNCM3bQIxx-TqkygaHcGfFj-Pt40xK2sip3JMFHE3TA&oe=6284F39D" height="100">
+						<h2>Dados da Compra</h2>
+						<p class="lead">Por gentileza preencha todos os dados corretamente.</p>
+					</div>
+			
+					<div class="row g-5">
+						<div class="col-md-5 col-lg-4 order-md-last">
+							<h4 class="d-flex justify-content-between align-items-center mb-3">
+								<span class="text-primary">Seu Pedido</span>
+								<span class="badge bg-primary rounded-pill">3</span>
+							</h4>
+							<ul class="list-group mb-3">
+								<li class="list-group-item d-flex justify-content-between lh-sm">
+									<div>
+										<h6 class="my-0">Item 1</h6>
+										<small class="text-muted">Breve descrição</small>
+									</div>
+									<span class="text-muted">R$ 12,00</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between lh-sm">
+									<div>
+										<h6 class="my-0">Item 2</h6>
+										<small class="text-muted">Breve descrição</small>
+									</div>
+									<span class="text-muted">R$ 8,00</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between lh-sm">
+									<div>
+										<h6 class="my-0">Item 3</h6>
+										<small class="text-muted">Breve descrição</small>
+									</div>
+									<span class="text-muted">R$ 5,00</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between bg-light">
+									<div class="text-success">
+										<h6 class="my-0">Codigo promocional</h6>
+										<small>exemplo</small>
+									</div>
+									<span class="text-success">− R$ 5,00</span>
+								</li>
+								<li class="list-group-item d-flex justify-content-between">
+									<span>Total (R$)</span>
+									<strong>R$ 20,00</strong>
+								</li>
+							</ul>
+			
+							<form class="card p-2">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Codigo promocional">
+									<button type="submit" class="btn btn-secondary">Validar</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-7 col-lg-8">
+							<h4 class="mb-3">Dados do Cliente</h4>
+							<form class="needs-validation" novalidate>
+								<div class="row g-3">
+									<div class="col-12">
+										<label for="firstName" class="form-label">Nome</label>
+										<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+										<div class="invalid-feedback">
+											Por Favor insira o Nome.
+										</div>
+									</div>
+			
+									<div class="col-12">
+										<label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+										<input type="email" class="form-control" id="email" placeholder="you@example.com">
+										<div class="invalid-feedback">
+											Por Favor insira o Email.
+										</div>
+									</div>
+			
+									<div class="col-12">
+										<label for="address" class="form-label">Endereço de Entrega</label>
+										<input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+										<div class="invalid-feedback">
+											Por Favor insira o Endereço.
+										</div>
+									</div>
+			
+									<div class="col-md-4">
+										<label for="state" class="form-label">Estado</label>
+										<select class="form-select" id="state" required>
+											<option value="">escolha...</option>
+											<option>São Paulo</option>
+										</select>
+										<div class="invalid-feedback">
+											Por Favor insira o Estado.
+										</div>
+									</div>
+			
+									<div class="col-md-3">
+										<label for="zip" class="form-label">CEP</label>
+										<input type="text" class="form-control" id="zip" placeholder="" required>
+										<div class="invalid-feedback">
+											Por Favor insira o CEP.
+										</div>
+									</div>
+								</div>
+			
+								<hr class="my-4">
+			
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="same-address">
+									<label class="form-check-label" for="same-address">Receber promoções</label>
+								</div>
+			
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="save-info">
+									<label class="form-check-label" for="save-info">Salvar Infomações para a proxima compra</label>
+								</div>
+			
+								<hr class="my-4">
+								<router-link to="/"><button class="w-100 btn btn-outline-success btn-lg" type="submit">Enviar Pedido no WhatsApp</button></router-link>
+								<hr class="my-4">
+								<router-link to="/"><button class="w-100 btn btn-outline-warning btn-lg" type="submit">Recomeçar Compra</button></router-link>
+							</form>
+						</div>
+					</div>
+				</main>
+
+				<footer class="my-5 pt-5 text-muted text-center text-small">
+					<p class="mb-1">&copy; Donburi House</p>
+					<ul class="list-inline">
+						<li class="list-inline-item"><a href="#">WhatsApp</a></li>
+					</ul>
+				</footer>
+			</div>` }
+		const routes = [
+			{ path: '/d', component: Home },
+			{ path: '/cardapio', component: About },
+			{ path: '/finalizar', component: Checkout },
+		]
+		const router = VueRouter.createRouter({
+			history: VueRouter.createWebHashHistory(),
+			routes,
+		})
+
+    createApp({
+			components: {},
+      data() {
+        return {
+					split_show: true,
+					produtos: {
+						1: {
+							nome: 'Gyudon',
+							descrição: 'prato japones',
+							url: 'gyudon',
+							valor: 25.00,
+							variações: ['sem pimenta', 'com ovo', 'com acelga', ''],
+							acompanhamentos: [25, 50, 51]
+						}
+					},
+					fretes: {},
+					promoções: {
+						1: {
+							valor: 12.00,
+							acompanhamentos: []
+						}
+					},
+					comanda: {
+						1: {
+							pessoa: '',
+							prato: 1,
+							variações: 'com ovo',
+							acompanhamentos: []
+						}
+					}
+        }
+      }
+    }).use(router).mount('#app')
+  </script>
+</html>
